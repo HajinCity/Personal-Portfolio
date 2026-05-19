@@ -49,10 +49,10 @@ export function HeroSection() {
             transition={{ delay: 0.2 }}
           >
             <span className="block text-4xl md:text-6xl lg:text-7xl font-bold bg-gradient-to-r from-[#1a7270] via-[#387999] to-[#3a9d90] bg-clip-text text-transparent mb-2">
-              John Doe
+              Carlos David Tabacon
             </span>
             <span className="block text-2xl md:text-3xl lg:text-4xl text-muted-foreground">
-              Full Stack Developer & Designer
+              Full Stack Developer, Designer & Virtual Assistant
             </span>
           </motion.h1>
 
