@@ -57,10 +57,10 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           <div>
             <h3 className="font-bold text-xl mb-4 bg-gradient-to-r from-[#1a7270] to-[#387999] bg-clip-text text-transparent">
-              John Doe
+              Carlos David Tabacon
             </h3>
             <p className="text-sm text-muted-foreground mb-4">
-              Full Stack Developer & Designer passionate about creating exceptional web experiences.
+              Full Stack Developer & Designer passionate about creating exceptional web experiences and also your Virtual Assistant.
             </p>
             <div className="flex gap-3">
               {socialLinks.map((social) => (

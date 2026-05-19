@@ -12,27 +12,27 @@ const contactInfo = [
   {
     icon: Mail,
     label: "Email",
-    value: "john.doe@example.com",
-    href: "mailto:john.doe@example.com",
+    value: "carlosdavidtabacon@gmail.com",
+    href: "mailto:carlosdavidtabacon@gmail.com",
   },
   {
     icon: Phone,
     label: "Phone",
-    value: "+1 (555) 123-4567",
-    href: "tel:+15551234567",
+    value: "+63 965 325 7555",
+    href: "tel:+639653257555",
   },
   {
     icon: MapPin,
     label: "Location",
-    value: "San Francisco, CA",
+    value: "Balangasan, Pagadian City, Philippines",
     href: "#",
   },
 ];
 
 const socialLinks = [
-  { icon: Github, href: "#", label: "GitHub", username: "@johndoe" },
-  { icon: Linkedin, href: "#", label: "LinkedIn", username: "/in/johndoe" },
-  { icon: Twitter, href: "#", label: "Twitter", username: "@johndoe" },
+  { icon: Github, href: "https://github.com/HajinCity", label: "GitHub", username: "@HajinCity" },
+  { icon: Linkedin, href: "https://linkedin.com/in/carlosdavidtabacon", label: "LinkedIn", username: "/in/carlosdavidtabacon" },
+  { icon: Twitter, href: "https://twitter.com/carlosdavidtabacon", label: "Twitter", username: "@carlosdavidtabacon" },
 ];
 
 export function ContactSection() {

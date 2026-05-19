@@ -62,8 +62,8 @@ export function HeroSection() {
             transition={{ delay: 0.4 }}
             className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-12"
           >
-            Crafting elegant solutions to complex problems. Passionate about creating
-            beautiful, functional, and user-friendly web experiences.
+            Crafting elegant digital solutions that blend functionality, creativity, and seamless user experience. 
+            Passionate about building modern web applications, designing intuitive interfaces and providing reliable virtual assistance that helps businesses grow.
           </motion.p>
 
           <motion.div
