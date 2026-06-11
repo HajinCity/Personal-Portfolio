@@ -70,6 +70,11 @@ const typeColors = {
 export function TimelineSection() {
   return (
     <section id="timeline" className="relative overflow-hidden py-20 px-4 sm:px-6 lg:px-8">
+      {/* City animated background */}
+      <div className="absolute inset-0">
+        <CityBackground />
+      </div>
+      <div className="absolute inset-0 bg-background/75" />
 
       <div className="max-w-5xl mx-auto">
         <motion.div

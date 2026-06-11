@@ -7,11 +7,10 @@ const navItems = [
   { name: "Home", href: "#home" },
   { name: "About", href: "#about" },
   { name: "Resume", href: "#resume" },
+  { name: "Projects", href: "#projects" },
   { name: "Timeline", href: "#timeline" },
   { name: "Achievements", href: "#achievements" },
-  { name: "Gallery", href: "#gallery" },
   { name: "Certificates", href: "#certificates" },
-  { name: "Blog", href: "#blog" },
   { name: "Contact", href: "#contact" },
 ];
 
@@ -64,18 +63,20 @@ export function Navigation() {
         animate={{ y: 0 }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? "bg-background/80 backdrop-blur-lg shadow-lg border-b border-border"
-            : "bg-transparent"
+            ? "bg-background/90 backdrop-blur-lg shadow-lg border-b border-border"
+            : "bg-gradient-to-b from-black/55 via-black/25 to-transparent"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <motion.div
               whileHover={{ scale: 1.05 }}
-              className="font-bold text-xl text-primary cursor-pointer"
+              className={`font-bold text-xl cursor-pointer transition-colors duration-300 ${
+                isScrolled ? "text-primary" : "text-white drop-shadow"
+              }`}
               onClick={() => scrollToSection("#home")}
             >
-              Portfolio
+              Carlos Tabacon
             </motion.div>
 
             <div className="hidden md:flex items-center gap-1">
@@ -83,10 +84,14 @@ export function Navigation() {
                 <motion.button
                   key={item.name}
                   onClick={() => scrollToSection(item.href)}
-                  className={`px-4 py-2 rounded-lg transition-colors relative ${
-                    activeSection === item.href.substring(1)
-                      ? "text-primary"
-                      : "text-foreground hover:text-primary"
+                  className={`px-4 py-2 rounded-lg transition-colors duration-300 relative font-medium ${
+                    isScrolled
+                      ? activeSection === item.href.substring(1)
+                        ? "text-primary"
+                        : "text-foreground hover:text-primary"
+                      : activeSection === item.href.substring(1)
+                        ? "text-white"
+                        : "text-white/80 hover:text-white"
                   }`}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -95,7 +100,9 @@ export function Navigation() {
                   {activeSection === item.href.substring(1) && (
                     <motion.div
                       layoutId="activeSection"
-                      className="absolute inset-0 bg-primary/10 rounded-lg -z-10"
+                      className={`absolute inset-0 rounded-lg -z-10 ${
+                        isScrolled ? "bg-primary/10" : "bg-white/15"
+                      }`}
                       transition={{ type: "spring", stiffness: 380, damping: 30 }}
                     />
                   )}
@@ -108,7 +115,9 @@ export function Navigation() {
                 variant="ghost"
                 size="icon"
                 onClick={toggleTheme}
-                className="rounded-full"
+                className={`rounded-full transition-colors duration-300 ${
+                  !isScrolled ? "text-white hover:bg-white/15 hover:text-white" : ""
+                }`}
               >
                 {isDark ? <Sun className="size-5" /> : <Moon className="size-5" />}
               </Button>
@@ -116,7 +125,9 @@ export function Navigation() {
               <Button
                 variant="ghost"
                 size="icon"
-                className="md:hidden"
+                className={`md:hidden transition-colors duration-300 ${
+                  !isScrolled ? "text-white hover:bg-white/15" : ""
+                }`}
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               >
                 {isMobileMenuOpen ? <X /> : <Menu />}

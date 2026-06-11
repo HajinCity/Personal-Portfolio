@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
 import { ChevronDown, Github, Linkedin, Mail, Twitter } from "lucide-react";
 import { Button } from "./ui/button";
+import { ShaderBackground } from "./ShaderBackground";
 
 export function HeroSection() {
   const scrollToContact = () => {
@@ -8,9 +9,9 @@ export function HeroSection() {
   };
 
   const socialLinks = [
-    { icon: Github, href: "#", label: "GitHub" },
-    { icon: Linkedin, href: "#", label: "LinkedIn" },
-    { icon: Twitter, href: "#", label: "Twitter" },
+    { icon: Github, href: "https://github.com/HajinCity", label: "GitHub" },
+    { icon: Linkedin, href: "https://linkedin.com/in/carlosdavidtabacon", label: "LinkedIn" },
+    { icon: Twitter, href: "https://twitter.com/carlosdavidtabacon", label: "Twitter" },
     { icon: Mail, href: "#contact", label: "Email" },
   ];
 
@@ -19,24 +20,13 @@ export function HeroSection() {
       id="home"
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      <div className="absolute inset-0 -z-10">
-        <motion.div
-          animate={{
-            background: [
-              "radial-gradient(circle at 20% 50%, #1a7270 0%, transparent 50%), radial-gradient(circle at 80% 50%, #387999 0%, transparent 50%)",
-              "radial-gradient(circle at 80% 50%, #126f39 0%, transparent 50%), radial-gradient(circle at 20% 50%, #3a9d90 0%, transparent 50%)",
-              "radial-gradient(circle at 50% 80%, #387999 0%, transparent 50%), radial-gradient(circle at 50% 20%, #1a7270 0%, transparent 50%)",
-              "radial-gradient(circle at 20% 50%, #1a7270 0%, transparent 50%), radial-gradient(circle at 80% 50%, #387999 0%, transparent 50%)",
-            ],
-          }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className="absolute inset-0 opacity-30 dark:opacity-20"
-        />
-
-        <div className="absolute inset-0 bg-grid-pattern opacity-10" />
+      {/* Shader layer — sits behind all content via DOM order */}
+      <div className="absolute inset-0">
+        <ShaderBackground />
       </div>
 
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      {/* Content layer — z-10 keeps it above the shader */}
+      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -48,10 +38,10 @@ export function HeroSection() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
           >
-            <span className="block text-4xl md:text-6xl lg:text-7xl font-bold bg-gradient-to-r from-[#1a7270] via-[#387999] to-[#3a9d90] bg-clip-text text-transparent mb-2">
+            <span className="block text-4xl md:text-6xl lg:text-7xl font-bold bg-gradient-to-r from-[#48CAE4] via-[#90E0EF] to-[#CAF0F8] bg-clip-text text-transparent mb-2 drop-shadow-lg">
               Carlos David Tabacon
             </span>
-            <span className="block text-2xl md:text-3xl lg:text-4xl text-muted-foreground">
+            <span className="block text-2xl md:text-3xl lg:text-4xl text-white/80 drop-shadow">
               Full Stack Developer, Designer & Virtual Assistant
             </span>
           </motion.h1>
@@ -60,7 +50,7 @@ export function HeroSection() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
-            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-12"
+            className="text-lg md:text-xl text-white/70 max-w-2xl mx-auto mb-12 drop-shadow"
           >
             Crafting elegant digital solutions that blend functionality, creativity, and seamless user experience. 
             Passionate about building modern web applications, designing intuitive interfaces and providing reliable virtual assistance that helps businesses grow.
@@ -102,7 +92,7 @@ export function HeroSection() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.8 + index * 0.1 }}
-                className="p-3 rounded-full bg-primary/10 hover:bg-primary hover:text-primary-foreground transition-colors"
+                className="p-3 rounded-full bg-white/10 backdrop-blur-sm hover:bg-white/25 text-white transition-colors border border-white/20"
                 aria-label={social.label}
               >
                 <social.icon className="size-5" />
@@ -117,7 +107,7 @@ export function HeroSection() {
         transition={{ duration: 2, repeat: Infinity }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2"
       >
-        <ChevronDown className="size-8 text-muted-foreground" />
+        <ChevronDown className="size-8 text-white/60" />
       </motion.div>
     </section>
   );

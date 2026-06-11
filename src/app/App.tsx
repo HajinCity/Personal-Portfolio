@@ -3,11 +3,10 @@ import { Navigation } from "./components/Navigation";
 import { HeroSection } from "./components/HeroSection";
 import { AboutSection } from "./components/AboutSection";
 import { ResumeSection } from "./components/ResumeSection";
+import { ProjectsSection } from "./components/ProjectsSection";
 import { TimelineSection } from "./components/TimelineSection";
 import { AchievementsSection } from "./components/AchievementsSection";
-import { GallerySection } from "./components/GallerySection";
 import { CertificatesSection } from "./components/CertificatesSection";
-import { BlogSection } from "./components/BlogSection";
 import { ContactSection } from "./components/ContactSection";
 import { Footer } from "./components/Footer";
 
@@ -19,11 +18,10 @@ export default function App() {
         <HeroSection />
         <AboutSection />
         <ResumeSection />
+        <ProjectsSection />
         <TimelineSection />
         <AchievementsSection />
-        <GallerySection />
         <CertificatesSection />
-        <BlogSection />
         <ContactSection />
       </main>
       <Footer />

@@ -9,13 +9,13 @@ const footerLinks = [
       { name: "Home", href: "#home" },
       { name: "About", href: "#about" },
       { name: "Resume", href: "#resume" },
-      { name: "Blog", href: "#blog" },
+      { name: "Contact", href: "#contact" },
     ],
   },
   {
-    title: "Projects",
+    title: "Sections",
     links: [
-      { name: "Gallery", href: "#gallery" },
+      { name: "Projects", href: "#projects" },
       { name: "Achievements", href: "#achievements" },
       { name: "Certificates", href: "#certificates" },
       { name: "Timeline", href: "#timeline" },
@@ -25,17 +25,17 @@ const footerLinks = [
     title: "Connect",
     links: [
       { name: "Contact", href: "#contact" },
-      { name: "GitHub", href: "#" },
-      { name: "LinkedIn", href: "#" },
-      { name: "Twitter", href: "#" },
+      { name: "GitHub", href: "https://github.com/HajinCity" },
+      { name: "LinkedIn", href: "https://linkedin.com/in/carlosdavidtabacon" },
+      { name: "Twitter", href: "https://twitter.com/carlosdavidtabacon" },
     ],
   },
 ];
 
 const socialLinks = [
-  { icon: Github, href: "#", label: "GitHub" },
-  { icon: Linkedin, href: "#", label: "LinkedIn" },
-  { icon: Twitter, href: "#", label: "Twitter" },
+  { icon: Github, href: "https://github.com/HajinCity", label: "GitHub" },
+  { icon: Linkedin, href: "https://linkedin.com/in/carlosdavidtabacon", label: "LinkedIn" },
+  { icon: Twitter, href: "https://twitter.com/carlosdavidtabacon", label: "Twitter" },
   { icon: Mail, href: "#contact", label: "Email" },
 ];
 
@@ -56,7 +56,7 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           <div>
-            <h3 className="font-bold text-xl mb-4 bg-gradient-to-r from-[#1a7270] to-[#387999] bg-clip-text text-transparent">
+            <h3 className="font-bold text-xl mb-4 bg-gradient-to-r from-[#0077B6] to-[#0096C7] bg-clip-text text-transparent">
               Carlos David Tabacon
             </h3>
             <p className="text-sm text-muted-foreground mb-4">
@@ -99,11 +99,11 @@ export function Footer() {
 
         <div className="pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-muted-foreground flex items-center gap-2">
-            © {new Date().getFullYear()} John Doe. Made with{" "}
+            © {new Date().getFullYear()} Carlos David Tabacon. Made with{" "}
             <Heart className="size-4 text-red-500 fill-red-500 inline animate-pulse" />
           </p>
           <p className="text-sm text-muted-foreground">
-            Built with React, Next.js & Tailwind CSS
+            Built with React, TypeScript & Tailwind CSS
           </p>
         </div>
       </div>

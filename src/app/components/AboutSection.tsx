@@ -1,26 +1,33 @@
+import { CityBackground } from "./CityBackground";
 import { motion } from "motion/react";
 import { Card } from "./ui/card";
 import { Badge } from "./ui/badge";
 import { Code2, Palette, Database, Zap } from "lucide-react";
 
 const skills = [
-  { name: "Frontend", icon: Code2, items: ["React", "Next.js", "TypeScript", "Tailwind CSS"] },
-  { name: "Backend", icon: Database, items: ["Node.js", "Python", "PostgreSQL", "MongoDB"] },
-  { name: "Design", icon: Palette, items: ["Figma", "UI/UX", "Motion Design", "Prototyping"] },
-  { name: "Tools", icon: Zap, items: ["Git", "Docker", "AWS", "CI/CD"] },
+  { name: "Frontend", icon: Code2, items: ["React", "HTML/CSS/JS", "TypeScript", "Tailwind CSS", "WordPress"] },
+  { name: "Backend", icon: Database, items: ["C# / .NET", "REST APIs", "Python", "SQL", "Firebase"] },
+  { name: "Design", icon: Palette, items: ["Figma", "UI/UX", "Canva", "Prototyping"] },
+  { name: "Tools", icon: Zap, items: ["Git / GitHub", "VS Code", "Cursor AI", "ClickUp", "Trello"] },
 ];
 
 const journey = [
-  { year: "2018", title: "Started Coding Journey", description: "Discovered passion for web development" },
-  { year: "2020", title: "First Developer Role", description: "Joined tech startup as frontend developer" },
-  { year: "2022", title: "Full Stack Mastery", description: "Expanded expertise to backend technologies" },
-  { year: "2024", title: "Senior Position", description: "Leading development teams and mentoring" },
+  { year: "2022", title: "First Real Project", description: "Built the 3 Degree Coffee Shop POS system — my first end-to-end production app — while starting BS Information Technology at Saint Columban College." },
+  { year: "2024", title: "Hestia Case Management System", description: "Developed a full VAWC case management platform with secure data handling, audit trails, and role-based access across desktop and mobile." },
+  { year: "2025-2026", title: "BS IT Graduate & Internship at ActiVerse", description: "Graduated from Saint Columban College and completed a 500-hour hybrid OJT at ActiVerse Incorporation in Makati, serving simultaneously as Full Stack Developer, WordPress Developer, Tech Support, and more." },
+  { year: "2025–2026", title: "Backend & Freelance Developer", description: "Built REST APIs and mobile features for Motodisk.com, developed the Accounts Payable Management System, and delivered client web projects — all while continuing to grow as a fullstack developer." },
 ];
 
 export function AboutSection() {
   return (
-    <section id="about" className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/30">
-      <div className="max-w-7xl mx-auto">
+    <section id="about" className="relative overflow-hidden py-20 px-4 sm:px-6 lg:px-8">
+      {/* City animated background */}
+      <div className="absolute inset-0">
+        <CityBackground />
+      </div>
+      <div className="absolute inset-0 bg-background/88" />
+
+      <div className="relative z-10 max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -28,7 +35,7 @@ export function AboutSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-[#1a7270] to-[#387999] bg-clip-text text-transparent">
+          <h2 className="text-3xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-[#0077B6] to-[#0096C7] bg-clip-text text-transparent">
             About Me
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
@@ -47,24 +54,40 @@ export function AboutSection() {
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                className="absolute inset-0 rounded-full bg-gradient-to-r from-[#1a7270] via-[#387999] to-[#3a9d90] blur-xl opacity-30"
+                className="absolute inset-0 rounded-full bg-gradient-to-r from-[#0077B6] via-[#0096C7] to-[#00B4D8] blur-xl opacity-30"
               />
               <div className="relative bg-background rounded-full w-64 h-64 mx-auto overflow-hidden border-4 border-primary/20">
-                <div className="w-full h-full bg-gradient-to-br from-[#1a7270] to-[#387999] flex items-center justify-center text-white text-6xl font-bold">
-                  JD
+                <img
+                  src="/projects/profile.jpg"
+                  alt="Carlos David Tabacon"
+                  className="w-full h-full object-cover object-top"
+                  onError={(e) => {
+                    // Fallback to initials if image is missing
+                    const el = e.currentTarget;
+                    el.style.display = "none";
+                    el.nextElementSibling?.removeAttribute("style");
+                  }}
+                />
+                <div
+                  style={{ display: "none" }}
+                  className="w-full h-full bg-gradient-to-br from-[#0077B6] to-[#0096C7] flex items-center justify-center text-white text-6xl font-bold"
+                >
+                  CD
                 </div>
               </div>
             </div>
             <div className="mt-8 space-y-4">
               <p className="text-foreground/90">
-                I'm a passionate developer with over 6 years of experience in crafting
-                elegant web solutions. I specialize in building scalable applications
-                with modern technologies and exceptional user experiences.
+                I'm a results-driven IT professional and Full Stack Developer with a
+                proven track record across software development, IT support, web development,
+                and client-facing roles. I specialize in building scalable systems, REST APIs,
+                relational databases, and WordPress platforms.
               </p>
               <p className="text-foreground/90">
-                When I'm not coding, you'll find me exploring new technologies,
-                contributing to open-source projects, or sharing knowledge through
-                technical writing and mentorship.
+                My experience spans desktop, mobile, and web — from building secure case
+                management systems to backend APIs for automotive platforms. I thrive in both
+                remote and onsite environments and am passionate about delivering reliable,
+                secure, and user-centered solutions.
               </p>
             </div>
           </motion.div>
@@ -115,7 +138,7 @@ export function AboutSection() {
         >
           <h3 className="text-2xl font-bold mb-8 text-center">My Journey</h3>
           <div className="relative">
-            <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#1a7270] via-[#387999] to-[#3a9d90] -translate-x-1/2" />
+            <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#0077B6] via-[#0096C7] to-[#00B4D8] -translate-x-1/2" />
             <div className="space-y-8">
               {journey.map((item, index) => (
                 <motion.div
