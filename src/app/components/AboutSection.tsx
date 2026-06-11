@@ -58,7 +58,7 @@ export function AboutSection() {
               />
               <div className="relative bg-background rounded-full w-64 h-64 mx-auto overflow-hidden border-4 border-primary/20">
                 <img
-                  src="/projects/profile.jpg"
+                  src={`${import.meta.env.BASE_URL}projects/profile.jpg`}
                   alt="Carlos David Tabacon"
                   className="w-full h-full object-cover object-top"
                   onError={(e) => {

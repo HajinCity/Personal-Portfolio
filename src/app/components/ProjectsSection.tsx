@@ -88,7 +88,7 @@ const projects = [
   {
     id: 6,
     title: "Nexus 2026 — Frontend Template",
-    type: "Frontend Website for Back Office" as ProjectType,
+    type: "Frontend Website for Back Officegt" as ProjectType,
     year: "2026",
     description:
       "A modern frontend template project built with React and TypeScript. Demonstrates component architecture, responsive design patterns, and modern UI/UX principles using contemporary web development tooling.",
@@ -118,7 +118,7 @@ const projects = [
   {
     id: 8,
     title: "Garahe.ph — Vehicle Maintenance & Service Tracker",
-    type: "Web App Motodisk" as ProjectType,
+    type: "Web App" as ProjectType,
     year: "2025–2026",
     description:
       "A CRM and service tracking platform for automotive repair shops. Provides customer management, service scheduling, maintenance history tracking, and automated reminders to enhance customer retention and streamline shop operations. Built with a focus on data security and user-friendly design.",
@@ -133,7 +133,7 @@ const projects = [
   {
     id: 9,
     title: "Meridian Harbour - Condominium Showcase Mockup",
-    type: "Website Mockup" as ProjectType,
+    type: "Frontend" as ProjectType,
     year: "2025–2026",
     description:
       "A modern web application for showcasing condominium properties. Features responsive design, interactive elements, and a user-friendly interface to provide potential buyers with an immersive experience.",
@@ -148,6 +148,8 @@ const projects = [
 ];
 
 const filters: ProjectType[] = ["All", "Web App", "Mobile App", "Desktop App", "Backend", "Frontend"];
+
+const base = import.meta.env.BASE_URL;
 
 export function ProjectsSection() {
   const [selectedFilter, setSelectedFilter] = useState<ProjectType>("All");
@@ -218,7 +220,7 @@ export function ProjectsSection() {
                 <div className={`relative mb-4 rounded-lg overflow-hidden aspect-[16/10] bg-gradient-to-br ${project.gradient} flex items-center justify-center`}>
                   {project.image ? (
                     <img
-                      src={project.image}
+                      src={`${base}${project.image.replace(/^\//, '')}`}
                       alt={project.title}
                       className="absolute inset-0 w-full h-full object-cover"
                     />
@@ -284,7 +286,7 @@ export function ProjectsSection() {
                 <div className={`relative rounded-xl overflow-hidden bg-gradient-to-br ${selectedProject.gradient} aspect-[16/10] flex items-center justify-center`}>
                   {selectedProject.image ? (
                     <img
-                      src={selectedProject.image}
+                      src={`${base}${selectedProject.image.replace(/^\//, '')}`}
                       alt={selectedProject.title}
                       className="absolute inset-0 w-full h-full object-cover"
                     />
