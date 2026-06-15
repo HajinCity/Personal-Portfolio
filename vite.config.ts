@@ -17,7 +17,9 @@ function figmaAssetResolver() {
 }
 
 export default defineConfig({
-  base: process.env.NODE_ENV === 'production' ? '/Personal-Portfolio/' : '/',
+  // Vercel sets VERCEL=1 automatically — use root base there.
+  // GitHub Pages needs the repo-name subdirectory as base.
+  base: process.env.VERCEL ? '/' : process.env.NODE_ENV === 'production' ? '/Personal-Portfolio/' : '/',
   plugins: [
     figmaAssetResolver(),
     // The React and Tailwind plugins are both required for Make, even if

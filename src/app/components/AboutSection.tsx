@@ -1,4 +1,3 @@
-import { CityBackground } from "./CityBackground";
 import { motion } from "motion/react";
 import { Card } from "./ui/card";
 import { Badge } from "./ui/badge";
@@ -20,12 +19,7 @@ const journey = [
 
 export function AboutSection() {
   return (
-    <section id="about" className="relative overflow-hidden py-20 px-4 sm:px-6 lg:px-8">
-      {/* City animated background */}
-      <div className="absolute inset-0">
-        <CityBackground />
-      </div>
-      <div className="absolute inset-0 bg-background/88" />
+    <section id="about" className="py-20 px-4 sm:px-6 lg:px-8">
 
       <div className="relative z-10 max-w-7xl mx-auto">
         <motion.div

@@ -7,62 +7,117 @@ import { Award, ExternalLink, X } from "lucide-react";
 import { Button } from "./ui/button";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 
+// ── Add your certificates here ────────────────────────────────────────────────
+// image: put the file in public/projects/ and set the path, e.g. "/projects/cert-aws.png"
+//        leave image as "" to show a placeholder instead
 const certificates = [
   {
     id: 1,
-    title: "AWS Solutions Architect - Professional",
-    issuer: "Amazon Web Services",
-    date: "2024",
+    title: "Philnits ITPEC Level 1 Certified",
+    issuer: "Philnits",
+    date: "2025",
     category: "Cloud Computing",
     credentialId: "AWS-SAP-2024-001",
+    image: "", // e.g. "/projects/cert-aws.png"
+    verifyUrl: "#",
     skills: ["AWS", "Cloud Architecture", "DevOps"],
   },
   {
     id: 2,
-    title: "Google Cloud Professional Developer",
-    issuer: "Google Cloud",
-    date: "2023",
-    category: "Cloud Computing",
-    credentialId: "GCP-PD-2023-456",
-    skills: ["GCP", "Kubernetes", "Docker"],
+    title: "Figma for User Interface and User Experience Design",
+    issuer: "Udemy - Sayaman Create Institute",
+    date: "2025",
+    category: "UI/UX Design",
+    credentialId: "UC-7cffa9dd",
+    image: "/projects/Figma.jpg",
+    verifyUrl: "#",
+    skills: ["Figma", "UI Design", "UX Design"],
   },
   {
     id: 3,
-    title: "Meta Front-End Developer",
-    issuer: "Meta",
-    date: "2023",
-    category: "Web Development",
-    credentialId: "META-FE-2023-789",
-    skills: ["React", "JavaScript", "UI/UX"],
+    title: "Cybersecurity 101: Foundation for Absolute Beginners",
+    issuer: "Udemy - School of AI",
+    date: "2025",
+    category: "Cybersecurity",
+    credentialId: "UC-d557f526",
+    image: "/projects/Cybersecurity.jpg",
+    verifyUrl: "#",
+    skills: ["Cybersecurity", "Network Security", "Ethical Hacking"],
   },
   {
     id: 4,
-    title: "MongoDB Certified Developer",
-    issuer: "MongoDB University",
-    date: "2022",
-    category: "Database",
-    credentialId: "MONGO-DEV-2022-123",
-    skills: ["MongoDB", "NoSQL", "Database Design"],
+    title: "Advance Certified in Program and Project Management (ACPPM)",
+    issuer: "Udemy - MTF Institute of Management, Technology and Finance",
+    date: "2025",
+    category: "Project Management",
+    credentialId: "UC-2b64be64",
+    image: "/projects/AdvancePJM.jpg",
+    verifyUrl: "#",
+    skills: ["Project Management", "Program Management", "Leadership"],
   },
   {
     id: 5,
-    title: "Certified Kubernetes Administrator",
-    issuer: "Cloud Native Computing Foundation",
-    date: "2022",
-    category: "DevOps",
-    credentialId: "CKA-2022-567",
-    skills: ["Kubernetes", "Container Orchestration"],
+    title: "C# For Beginners",
+    issuer: "Udemy - Frank Anemaet",
+    date: "2023",
+    category: "Programming",
+    credentialId: "UC-62aba739",
+    image: "/projects/CSharp.jpg",
+    verifyUrl: "#",
+    skills: ["C#", "Object-Oriented Programming", "Software Development"],
   },
   {
     id: 6,
-    title: "Professional Scrum Master I",
-    issuer: "Scrum.org",
-    date: "2021",
+    title: "HTML, CSS, Javascript, React - Online Certification Course",
+    issuer: "Udemy - YouAccel Training, Blue Digital Media",
+    date: "2025",
+    category: "Web Development",
+    credentialId: "UC-17deb45d",
+    image: "/projects/HTMLCSSJS.jpg",
+    verifyUrl: "#",
+    skills: ["HTML", "CSS", "JavaScript", "React"],
+  },
+  {
+    id: 7,
+    title: "Network Defense Fundamentals: Training For IT Beginners",
+    issuer: "Udemy - Meta Brains",
+    date: "2025",
+    category: "Network Security",
+    credentialId: "UC-a3c62486",
+    image: "/projects/Networking.jpg",
+    verifyUrl: "#",
+    skills: ["Network Security", "Cybersecurity", "IT Fundamentals"],
+  },
+  {
+    id: 8,
+    title: "Professiional Diploma in Agile and Project Management",
+    issuer: "Udemy - MTF Institute of Management, Technology and Finance",
+    date: "2025",
     category: "Project Management",
-    credentialId: "PSM-I-2021-890",
-    skills: ["Scrum", "Agile", "Team Leadership"],
+    credentialId: "UC-3fed2e11",
+    image: "/projects/PJM.jpg",
+    verifyUrl: "#",
+    skills: ["Project Management", "Agile", "Leadership"],
+  },
+  {
+    id: 9,
+    title: "Complete SQL & Relational Database Management System (RDBMS) Course",
+    issuer: "Udemy - Atul Kadlag",
+    date: "2025",
+    category: "Database Management",
+    credentialId: "UC-2e176520",
+    image: "/projects/SQL.jpg",
+    verifyUrl: "#",
+    skills: ["Database Management", "SQL", "Data Analysis"],
   },
 ];
+
+const base = import.meta.env.BASE_URL;
+function certImg(image: string, fallbackId: number, size: string) {
+  return image
+    ? `${base}${image.replace(/^\//, "")}`
+    : `https://picsum.photos/seed/cert-${fallbackId}/${size}`;
+}
 
 const categories = ["All", ...Array.from(new Set(certificates.map(c => c.category)))];
 
@@ -129,7 +184,7 @@ export function CertificatesSection() {
 
                 <div className="relative mb-4 rounded-lg overflow-hidden bg-gradient-to-br from-muted to-muted/50 aspect-[16/10] flex items-center justify-center">
                   <ImageWithFallback
-                    src={`https://picsum.photos/seed/cert-${cert.id}/400/250`}
+                    src={certImg(cert.image, cert.id, "400/250")}
                     alt={cert.title}
                     className="w-full h-full object-cover"
                   />
@@ -177,7 +232,7 @@ export function CertificatesSection() {
 
                 <div className="relative rounded-xl overflow-hidden bg-gradient-to-br from-muted to-muted/50 aspect-[16/10]">
                   <ImageWithFallback
-                    src={`https://picsum.photos/seed/cert-${selectedCertificate.id}/800/500`}
+                    src={certImg(selectedCertificate.image, selectedCertificate.id, "800/500")}
                     alt={selectedCertificate.title}
                     className="w-full h-full object-cover"
                   />

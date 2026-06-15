@@ -17,14 +17,14 @@ const contactInfo = [
   },
   {
     icon: Phone,
-    label: "Phone",
+    label: "Whatsapp",
     value: "+63 965 325 7555",
     href: "tel:+639653257555",
   },
   {
     icon: MapPin,
     label: "Location",
-    value: "Balangasan, Pagadian City, Philippines",
+    value: "Philippines",
     href: "#",
   },
 ];
@@ -44,15 +44,39 @@ export function ContactSection() {
     message: "",
   });
 
+  // 👉 Get your free key at https://web3forms.com then replace the value below
+  const WEB3FORMS_KEY = "YOUR_ACCESS_KEY_HERE";
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_KEY,
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+        }),
+      });
 
-    toast.success("Message sent successfully! I'll get back to you soon.");
-    setFormData({ name: "", email: "", subject: "", message: "" });
-    setIsSubmitting(false);
+      const data = await res.json();
+
+      if (data.success) {
+        toast.success("Message sent! I'll get back to you soon.");
+        setFormData({ name: "", email: "", subject: "", message: "" });
+      } else {
+        toast.error("Something went wrong. Please try again or email me directly.");
+      }
+    } catch {
+      toast.error("Network error. Please check your connection and try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
