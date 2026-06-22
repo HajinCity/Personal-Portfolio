@@ -111,9 +111,14 @@ export function ResumeSection() {
           <p className="text-muted-foreground text-lg mb-8">
             Professional experience and qualifications
           </p>
-          <Button size="lg" className="gap-2">
-            <Download className="size-4" />
-            Download Resume
+          <Button size="lg" className="gap-2" asChild>
+            <a
+              href={`${import.meta.env.BASE_URL}resume/Carlos-Tabacon-Resume.pdf`}
+              download="Carlos-Tabacon-Resume.pdf"
+            >
+              <Download className="size-4" />
+              Download Resume
+            </a>
           </Button>
         </motion.div>
 
