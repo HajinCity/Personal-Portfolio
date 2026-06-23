@@ -40,7 +40,10 @@ float vnoise(vec2 p) {
 
 float fbm(vec2 p) {
   float v = 0.0, a = 0.5;
-  for (int i = 0; i < 6; i++) {
+  // 4 octaves (was 6) — cuts noise cost per pixel by a third. fbm() runs 3x
+  // per pixel (twice for the warp field, once for the final value), so this
+  // is the single biggest lever on fragment-shader cost.
+  for (int i = 0; i < 4; i++) {
     v += a * (vnoise(p) * 2.0 - 1.0);
     p = p * 2.1 + vec2(1.7, 9.2);
     a *= 0.5;
@@ -143,7 +146,13 @@ export function ShaderBackground() {
       canvas.getContext("experimental-webgl")) as WebGLRenderingContext | null;
     if (!gl) return;
 
-    const dpr = window.devicePixelRatio || 1;
+    // Rendering at full devicePixelRatio means 4-9x the pixels on retina/most
+    // phone screens — pure fill-rate cost for a soft, slow-moving background
+    // nobody is examining pixel-by-pixel. Cap it, and cap harder on touch
+    // devices (weaker GPUs, smaller/closer screens where the difference is
+    // invisible anyway).
+    const isCoarsePointer = window.matchMedia?.("(pointer: coarse)").matches ?? false;
+    const dpr = Math.min(window.devicePixelRatio || 1, isCoarsePointer ? 1 : 1.5);
 
     const resize = () => {
       const r = canvas.getBoundingClientRect();
@@ -185,8 +194,22 @@ export function ShaderBackground() {
 
     const start = performance.now() / 1000;
 
-    const render = () => {
-      const t   = performance.now() / 1000 - start;
+    // Cap to 30fps — this is slow-drifting cloud noise, not an action game;
+    // halving the draw rate on 60Hz+ displays halves GPU work with no visible
+    // smoothness loss.
+    const FRAME_INTERVAL = 1000 / 30;
+    let lastDraw = 0;
+    let running = false;
+    let inView = true;
+    let tabVisible = document.visibilityState === "visible";
+
+    const render = (now: number) => {
+      rafRef.current = requestAnimationFrame(render);
+
+      if (now - lastDraw < FRAME_INTERVAL) return;
+      lastDraw = now;
+
+      const t   = now / 1000 - start;
       const age = t - clickRef.current.t;
       const mx  = mouseRef.current.x < 0 ? canvas.width  / 2 : mouseRef.current.x;
       const my  = mouseRef.current.y < 0 ? canvas.height / 2 : mouseRef.current.y;
@@ -197,14 +220,41 @@ export function ShaderBackground() {
       gl.uniform2f(uClick,    clickRef.current.x, clickRef.current.y);
       gl.uniform1f(uClickAge, age);
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    };
+
+    const stop = () => {
+      if (!running) return;
+      running = false;
+      cancelAnimationFrame(rafRef.current);
+    };
+    const go = () => {
+      if (running || !inView || !tabVisible) return;
+      running = true;
       rafRef.current = requestAnimationFrame(render);
     };
-    rafRef.current = requestAnimationFrame(render);
+
+    // Pause entirely once the hero is scrolled off-screen or the tab is
+    // backgrounded — no GPU cycles spent on a background nobody can see.
+    const io = new IntersectionObserver(([entry]) => {
+      inView = entry.isIntersecting;
+      inView ? go() : stop();
+    }, { threshold: 0 });
+    io.observe(canvas);
+
+    const onVisibility = () => {
+      tabVisible = document.visibilityState === "visible";
+      tabVisible ? go() : stop();
+    };
+    document.addEventListener("visibilitychange", onVisibility);
+
+    go();
 
     return () => {
       cancelAnimationFrame(raf0);
-      cancelAnimationFrame(rafRef.current);
+      stop();
       ro.disconnect();
+      io.disconnect();
+      document.removeEventListener("visibilitychange", onVisibility);
       gl.deleteProgram(prog);
       gl.deleteBuffer(buf);
     };
