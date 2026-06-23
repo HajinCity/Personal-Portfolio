@@ -82,7 +82,10 @@ const skillsProgress = [
   { skill: "WordPress", level: 90 },
   { skill: "SQL / Databases", level: 82 },
   { skill: "HTML / CSS / JS", level: 80 },
-  { skill: "ReactJS", level: 75 },
+  { skill: "ReactJS", level: 71 },
+  { skill: "Microsoft Word", level: 90 },
+  { skill: "Microsoft Excel", level: 90 },
+  { skill: "Microsoft PowerPoint", level: 80 },
   { skill: "Git / GitHub", level: 80 },
   { skill: "Firebase", level: 75 },
   { skill: "Python", level: 60 },
@@ -92,6 +95,16 @@ const skillsProgress = [
   { skill: "Codex/Chatgpt", level: 90 },
   { skill: "Lovable", level: 90 },
   { skill: "Base44", level: 90 },
+  { skill: "Project Management", level: 90 },
+  { skill: "Waterfall Model", level: 90 },
+  { skill: "Agile / Scrum", level: 70 },
+  { skill: "Figma", level: 70 },
+  { skill: "Canva", level: 80 },
+  { skill: "Trello", level: 80 },
+  { skill: "Google Workspace", level: 80 },
+  { skill: "Technical Support", level: 80 },
+  { skill: "Customer Support", level: 80 },
+  { skill: "Sales Representative", level: 70 },
 ];
 
 export function ResumeSection() {

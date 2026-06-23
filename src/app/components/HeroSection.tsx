@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { ChevronDown, Github, Linkedin, Mail, Twitter } from "lucide-react";
+import { ChevronDown, Github, Linkedin, Mail } from "lucide-react";
 import { Button } from "./ui/button";
 import { ShaderBackground } from "./ShaderBackground";
 
@@ -8,10 +8,13 @@ export function HeroSection() {
     document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const scrollToResume = () => {
+    document.getElementById("resume")?.scrollIntoView({ behavior: "smooth" });
+  };
+
   const socialLinks = [
     { icon: Github, href: "https://github.com/HajinCity", label: "GitHub" },
-    { icon: Linkedin, href: "https://linkedin.com/in/carlosdavidtabacon", label: "LinkedIn" },
-    { icon: Twitter, href: "https://twitter.com/carlosdavidtabacon", label: "Twitter" },
+    { icon: Linkedin, href: "https://ph.linkedin.com/in/carlosadavidtabacon", label: "LinkedIn" },
     { icon: Mail, href: "#contact", label: "Email" },
   ];
 
@@ -62,7 +65,7 @@ export function HeroSection() {
             transition={{ delay: 0.6 }}
             className="flex flex-wrap gap-4 justify-center mb-16"
           >
-            <Button size="lg" className="group">
+            <Button size="lg" className="group" onClick={scrollToResume}>
               View Resume
               <motion.span
                 className="inline-block ml-2"

@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { Github, Linkedin, Twitter, Mail, Heart, ArrowUp } from "lucide-react";
+import { Github, Linkedin, Mail, Heart, ArrowUp } from "lucide-react";
 import { Button } from "./ui/button";
 
 const footerLinks = [
@@ -26,16 +26,14 @@ const footerLinks = [
     links: [
       { name: "Contact", href: "#contact" },
       { name: "GitHub", href: "https://github.com/HajinCity" },
-      { name: "LinkedIn", href: "https://linkedin.com/in/carlosdavidtabacon" },
-      { name: "Twitter", href: "https://twitter.com/carlosdavidtabacon" },
+      { name: "LinkedIn", href: "https://ph.linkedin.com/in/carlosadavidtabacon" },
     ],
   },
 ];
 
 const socialLinks = [
   { icon: Github, href: "https://github.com/HajinCity", label: "GitHub" },
-  { icon: Linkedin, href: "https://linkedin.com/in/carlosdavidtabacon", label: "LinkedIn" },
-  { icon: Twitter, href: "https://twitter.com/carlosdavidtabacon", label: "Twitter" },
+  { icon: Linkedin, href: "https://ph.linkedin.com/in/carlosadavidtabacon", label: "LinkedIn" },
   { icon: Mail, href: "#contact", label: "Email" },
 ];
 

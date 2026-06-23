@@ -4,8 +4,8 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { Label } from "./ui/label";
-import { Mail, MapPin, Phone, Send, Github, Linkedin, Twitter } from "lucide-react";
-import { useState } from "react";
+import { Mail, MapPin, Phone, Send, Github, Linkedin } from "lucide-react";
+import { useRef, useState } from "react";
 import { toast } from "sonner";
 
 const contactInfo = [
@@ -31,8 +31,7 @@ const contactInfo = [
 
 const socialLinks = [
   { icon: Github, href: "https://github.com/HajinCity", label: "GitHub", username: "@HajinCity" },
-  { icon: Linkedin, href: "https://linkedin.com/in/carlosdavidtabacon", label: "LinkedIn", username: "/in/carlosdavidtabacon" },
-  { icon: Twitter, href: "https://twitter.com/carlosdavidtabacon", label: "Twitter", username: "@carlosdavidtabacon" },
+  { icon: Linkedin, href: "https://ph.linkedin.com/in/carlosadavidtabacon", label: "LinkedIn", username: "/in/carlosadavidtabacon" },
 ];
 
 export function ContactSection() {
@@ -44,11 +43,20 @@ export function ContactSection() {
     message: "",
   });
 
-  // 👉 Get your free key at https://web3forms.com then replace the value below
-  const WEB3FORMS_KEY = "YOUR_ACCESS_KEY_HERE";
+  const WEB3FORMS_KEY = "18afb78b-e31b-45c7-bd9a-b93575e05c05";
+
+  // Honeypot: invisible to real visitors, but bots that auto-fill every field
+  // will fill this in too — Web3Forms silently drops the submission when it's set.
+  const honeypotRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Bot caught by the honeypot — silently drop, no toast, don't tip them off.
+    if (honeypotRef.current?.checked) {
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
@@ -61,6 +69,7 @@ export function ContactSection() {
           email: formData.email,
           subject: formData.subject,
           message: formData.message,
+          botcheck: "",
         }),
       });
 
@@ -178,6 +187,16 @@ export function ContactSection() {
             <Card className="p-8">
               <h3 className="text-2xl font-bold mb-6">Send a Message</h3>
               <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Honeypot — hidden from real users, traps bots that auto-fill every field */}
+                <input
+                  type="checkbox"
+                  name="botcheck"
+                  ref={honeypotRef}
+                  style={{ display: "none" }}
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
+
                 <div className="space-y-2">
                   <Label htmlFor="name">Name</Label>
                   <Input

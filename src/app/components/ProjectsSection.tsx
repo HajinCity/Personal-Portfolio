@@ -21,7 +21,7 @@ const projects = [
     gradient: "from-[#03045E] via-[#023E8A] to-[#0077B6]",
     image: "/projects/Hestia.png", // e.g. "/projects/hestia.png"
     github: "#",
-    live: "#",
+    live: "",
     featured: true,
   },
   {
@@ -50,8 +50,8 @@ const projects = [
     icon: Smartphone,
     gradient: "from-[#0077B6] via-[#0096C7] to-[#00B4D8]",
     image: "/projects/tuluyan.png", // e.g. "/projects/tuluyan.png"
-    github: "#",
-    live: "#",
+    github: "https://github.com/HajinCity/TuluyanApp2",
+    live: "", // local-only deployment — code link only
     featured: false,
   },
   {
@@ -61,12 +61,12 @@ const projects = [
     year: "2025–2026",
     description:
       "An end-to-end system automating invoice processing and financial workflows. Features database-driven data handling, accurate audit trail management, automated reporting, and significant reduction in manual processing errors.",
-    tags: ["C#", ".NET", "SQL", "REST APIs", "Automation"],
+    tags: ["C#", ".NET", "SQL", "REST APIs", "Desktop", "OOP"],
     icon: Monitor,
     gradient: "from-[#0096C7] via-[#00B4D8] to-[#48CAE4]",
     image: "/projects/aps.png", // e.g. "/projects/APS.jpg"
-    github: "#",
-    live: "#",
+    github: "https://github.com/HajinCity/WindowsFormsApp1",
+    live: "", // local-only deployment — code link only
     featured: false,
   },
   {
@@ -81,7 +81,7 @@ const projects = [
     gradient: "from-[#00B4D8] via-[#48CAE4] to-[#90E0EF]",
     image: "", // e.g. "/projects/3degree.png"
     github: "#",
-    live: "#",
+    live: "", // local-only deployment — code link only
     featured: false,
   },
 
@@ -96,8 +96,8 @@ const projects = [
     icon: Code2,
     gradient: "from-[#0077B6] via-[#00B4D8] to-[#48CAE4]",
     image: "/projects/nexus.png",
-    github: "#",
-    live: "#",
+    github: "https://github.com/HajinCity/Nexus-Private-Org",
+    live: "", // local-only deployment — code link only
     featured: false,
   },
   {
@@ -111,8 +111,8 @@ const projects = [
     icon: Monitor,
     gradient: "from-[#03045E] via-[#023E8A] to-[#0077B6]",
     image: "/projects/HestiaMobile.png", // e.g. "/projects/hestia.png"
-    github: "#",
-    live: "#",
+    github: "https://github.com/HajinCity/VawcSanPedro2",
+    live: "https://www.mediafire.com/file/ske7rxqkjamkggd/VAWC-SanPedroIX.apk/file",
     featured: true,
   },
   {
@@ -142,7 +142,7 @@ const projects = [
     gradient: "from-[#03045E] via-[#023E8A] to-[#0077B6]",
     image: "/projects/Meridian.png", // e.g. "/projects/meridian.png"
     github: "#",
-    live: "",
+    live: "", // local-only deployment
     featured: true,
   },
 ];
@@ -150,6 +150,9 @@ const projects = [
 const filters: ProjectType[] = ["All", "Web App", "Mobile App", "Desktop App", "Backend", "Frontend"];
 
 const base = import.meta.env.BASE_URL;
+
+// A link counts as "real" if it's set and isn't just a "#" placeholder
+const hasLink = (url?: string) => Boolean(url && url !== "#");
 
 export function ProjectsSection() {
   const [selectedFilter, setSelectedFilter] = useState<ProjectType>("All");
@@ -340,18 +343,31 @@ export function ProjectsSection() {
                   </div>
 
                   <div className="flex gap-3">
-                    <Button className="flex-1 gap-2" asChild>
-                      <a href={selectedProject.live} target="_blank" rel="noopener noreferrer">
-                        <ExternalLink className="size-4" />
-                        View Live
-                      </a>
-                    </Button>
-                    <Button variant="outline" className="flex-1 gap-2" asChild>
-                      <a href={selectedProject.github} target="_blank" rel="noopener noreferrer">
+                    {hasLink(selectedProject.live) && (
+                      <Button className="flex-1 gap-2" asChild>
+                        <a href={selectedProject.live} target="_blank" rel="noopener noreferrer">
+                          <ExternalLink className="size-4" />
+                          View Live
+                        </a>
+                      </Button>
+                    )}
+                    {hasLink(selectedProject.github) ? (
+                      <Button
+                        variant={hasLink(selectedProject.live) ? "outline" : "default"}
+                        className="flex-1 gap-2"
+                        asChild
+                      >
+                        <a href={selectedProject.github} target="_blank" rel="noopener noreferrer">
+                          <Github className="size-4" />
+                          View Code
+                        </a>
+                      </Button>
+                    ) : (
+                      <Button variant="outline" className="flex-1 gap-2" disabled>
                         <Github className="size-4" />
-                        View Code
-                      </a>
-                    </Button>
+                        Code Private
+                      </Button>
+                    )}
                   </div>
                 </div>
               </div>
